@@ -1,0 +1,2 @@
+backend = postrge and python 
+frontend tkinter 
