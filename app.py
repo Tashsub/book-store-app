@@ -1,6 +1,7 @@
 #written by: Tashinga 
 
 from tkinter import *
+import backend
 
 window=Tk()
 
@@ -57,11 +58,11 @@ add=Button(window, text="Add Entry", width = 30, height = 2)
 add.grid(row=4, column=3, columnspan=10) 
 
 #update
-update=Button(window, text="Update Entry", width = 30, height = 2)
+update=Button(window, text="Update Selected", width = 30, height = 2)
 update.grid(row=5, column=3, columnspan=10) 
 
 #Delete
-delete=Button(window, text="Delete Entry", width = 30, height = 2)
+delete=Button(window, text="Delete Selected", width = 30, height = 2)
 delete.grid(row=6, column=3, columnspan=10) 
 
 #close
