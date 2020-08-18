@@ -13,7 +13,8 @@ def insert_book(title, year, author, isbn, file_path):
     conn.commit()
     conn.close()
 
-insert_book("The Best", 1989, "Crhis Rogers", 23452, "okay" )
+#insert_book("The Best", 1989, "Crhis Rogers", 23452, "okay" )
+#insert_book("op", 1989, "Crhis Rogers", 23452, "okay" )
 
 def view():
     conn = sqlite3.connect("bookshop.db")
@@ -23,14 +24,33 @@ def view():
     print(rows)
     conn.commit()
     conn.close()
+    return rows
 
-def search_entry(title, year, isbn, author):
-    
+def search_entry(title="", author="", isbn="", year=""):
     conn = sqlite3.connect("bookshop.db")
     cur = conn.cursor()
-    cur.execute('SELECT * FROM books WHERE title =?',(title) )
+    cur.execute('SELECT * FROM books WHERE title=? OR author=? OR isbn=? OR year=?',(title,author, isbn, year))
+    rows = cur.fetchall()
+    conn.commit()
+    conn.close()
+    return rows
+
+def del_entry(unique_id):
+    conn = sqlite3.connect("bookshop.db")
+    cur = conn.cursor()
+    cur.execute('DELETE * FROM books WHERE id=?',(unique_id,))
     rows = cur.fetchall()
     conn.commit()
     conn.close()
 
-view()
+def update_entry(unique_id, title, year, isbn, author): 
+    conn = sqlite3.connect("bookshop.db")
+    cur = conn.cursor()
+    cur.execute('UPDATE books SET title =?, year=?, isbn =?, author=? WHERE id=?',(unique_id,title,year,isbn,author))
+    rows = cur.fetchall()
+    conn.commit()
+    conn.close()
+
+
+
+    
