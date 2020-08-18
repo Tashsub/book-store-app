@@ -35,10 +35,10 @@ def search_entry(title="", author="", isbn="", year=""):
     conn.close()
     return rows
 
-def del_entry(unique_id):
+def delete_entry(unique_id):
     conn = sqlite3.connect("bookshop.db")
     cur = conn.cursor()
-    cur.execute('DELETE * FROM books WHERE id=?',(unique_id,))
+    cur.execute('DELETE FROM books WHERE id=?',(unique_id,))
     rows = cur.fetchall()
     conn.commit()
     conn.close()

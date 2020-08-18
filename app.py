@@ -29,6 +29,23 @@ def add():
     backend.insert_book(title, year, author, isbn)
     a11.insert(END,(title, author, isbn, year))
 
+#this return the index of the row selected 
+#add 1 so this then becomes the id in the table
+def get_seleted_row(event):
+    global row
+    index = a11.curselection()[0]
+    row = a11.get(index)
+    print(row)
+    return row
+
+def delete_selected():
+    print(row[0])
+    l = int(row[0])
+    backend.delete_entry(l)
+    view()
+  
+
+
 window=Tk()
 
 #title field
@@ -69,6 +86,8 @@ a10.grid(row=1,column=4)
 a11 = Listbox(window, height=20, width=50)
 a11.grid(row=2,column=0,rowspan=10,columnspan=2)
 
+a11.bind('<<ListboxSelect>>', get_seleted_row)
+
 
 #scrollbar for listbox
 scroll = Scrollbar(window)
@@ -94,7 +113,7 @@ update=Button(window, text="Update Selected", width = 30, height = 2)
 update.grid(row=5, column=3, columnspan=10) 
 
 #Delete
-delete=Button(window, text="Delete Selected", width = 30, height = 2)
+delete=Button(window, text="Delete Selected", width = 30, height = 2, command=delete_selected)
 delete.grid(row=6, column=3, columnspan=10) 
 
 #close
