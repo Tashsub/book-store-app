@@ -1,2 +1,6 @@
 backend = postrge and python 
 frontend tkinter 
+
+
+Improvments: would be good idea to use postgre as this would potentially allow
+easier storing of images. 
