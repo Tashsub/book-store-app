@@ -43,14 +43,21 @@ def delete_entry(unique_id):
     conn.commit()
     conn.close()
 
-def update_entry(unique_id, title, year, isbn, author): 
+def update_entry(title,year, isbn, author,unique_id): 
     conn = sqlite3.connect("bookshop.db")
     cur = conn.cursor()
-    cur.execute('UPDATE books SET title =?, year=?, isbn =?, author=? WHERE id=?',(unique_id,title,year,isbn,author))
+    cur.execute('UPDATE books SET title =?, year=?, author =?, isbn=? WHERE id=?',(title,year,author,isbn,unique_id))
     rows = cur.fetchall()
     conn.commit()
     conn.close()
 
 
+def drop_table():
+    conn = sqlite3.connect("bookshop.db")
+    cur = conn.cursor()
+    cur.execute('DROP TABLE books')
+    conn.commit()
+    conn.close()
 
-    
+
+#drop_table() 

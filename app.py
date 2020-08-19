@@ -18,7 +18,6 @@ def search_q():
     results = backend.search_entry(title, author, isbn, year)
     for item in results:
         a11.insert(END, item)
-    a11.insert(END,results)
 
 def add():
     a11.delete(0, END)
@@ -27,22 +26,53 @@ def add():
     isbn= isbn_entry.get()
     year= year_entry.get()
     backend.insert_book(title, year, author, isbn)
-    a11.insert(END,(title, author, isbn, year))
+    a11.insert(END,(title, year, author, isbn))
 
-#this return the index of the row selected 
-#add 1 so this then becomes the id in the table
+
 def get_seleted_row(event):
     global row
     index = a11.curselection()[0]
+    print("The index is", index)
     row = a11.get(index)
-    print(row)
+    print("The row is ", row)
+    #each time a user clicks on a row it will be displayed
+    #in the fields
+    unique_id = row[0]
+    title=row[1]
+    year=row[2]
+    author=row[3]
+    isbn=row[4]
+
+    a2.delete(0,END)
+    a4.delete(0, END)
+    a6.delete(0,END)
+    a8.delete(0,END)
+    a2.insert(END,title)
+    a4.insert(END, year)
+    a6.insert(END, author)
+    a8.insert(END, isbn)
     return row
 
 def delete_selected():
     print(row[0])
-    l = int(row[0])
-    backend.delete_entry(l)
+    unique_id = int(row[0])
+    backend.delete_entry(unique_id)
     view()
+
+def update_selected():
+    unique_id =row[0]
+    title= row[1]
+    year = row[2]
+    isbn = int(row[3])
+    author = str(row[4])
+    print("id", type(unique_id))
+    print("Title", type(title))
+    print("year", type(year))
+    print("isbn", type(isbn))
+    print("author", type(author))
+    backend.update_entry(title,year,isbn,author,unique_id)
+    
+
   
 
 
@@ -109,7 +139,7 @@ add=Button(window, text="Add Entry", width = 30, height = 2, command=add)
 add.grid(row=4, column=3, columnspan=10) 
 
 #update
-update=Button(window, text="Update Selected", width = 30, height = 2)
+update=Button(window, text="Update Selected", width = 30, height = 2, command=update_selected)
 update.grid(row=5, column=3, columnspan=10) 
 
 #Delete
@@ -117,7 +147,7 @@ delete=Button(window, text="Delete Selected", width = 30, height = 2, command=de
 delete.grid(row=6, column=3, columnspan=10) 
 
 #close
-close=Button(window, text="Close", width = 30, height = 2)
+close=Button(window, text="Close", width = 30, height = 2, command=window.destroy)
 close.grid(row=7, column=3, columnspan=10) 
 
 window.mainloop()
