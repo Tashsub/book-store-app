@@ -1,7 +1,12 @@
 #written by: Tashinga 
 
 from tkinter import *
+from tkinter import filedialog
 import backend
+from PIL import ImageTk, Image
+import os
+from tkinter.filedialog import asksaveasfile 
+import shutil
 
 #command functions
 def view():
@@ -68,10 +73,18 @@ def update_selected():
     backend.update_entry(title,year,author,isbn,unique_id)
     view()
 
-    
+def upload_file(event=None):
+    filename = filedialog.askopenfilename()
+    source = filename
+    print('Selected:', filename)
+    input = filename
 
+def save(): 
+    files = [('All Files', '*.*'),  
+             ('Python Files', '*.py'), 
+             ('Text Document', '*.txt')] 
+    file = asksaveasfile(filetypes = files, defaultextension = files) 
   
-
 
 window=Tk()
 
@@ -106,7 +119,7 @@ a8.grid(row=1, column=3)
 #attachments
 a9=Label(window, text="Attachments")
 a9.grid(row=0, column=4)
-a10=Button(window, text="Upload", width=10)
+a10=Button(window, text="Upload", width=10, command= upload_file)
 a10.grid(row=1,column=4)
 
 #list box to display content
@@ -146,5 +159,12 @@ delete.grid(row=6, column=3, columnspan=10)
 #close
 close=Button(window, text="Close", width = 30, height = 2, command=window.destroy)
 close.grid(row=7, column=3, columnspan=10) 
+
+#image
+img = ImageTk.PhotoImage(Image.open("img1.JPG"))
+panel = Label(window, image = img)
+panel.grid(row=20, column=0, columnspan = 20)
+
+
 
 window.mainloop()
