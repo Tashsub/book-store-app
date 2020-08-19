@@ -43,7 +43,7 @@ def delete_entry(unique_id):
     conn.commit()
     conn.close()
 
-def update_entry(title,year, isbn, author,unique_id): 
+def update_entry(title,year,author,isbn,unique_id): 
     conn = sqlite3.connect("bookshop.db")
     cur = conn.cursor()
     cur.execute('UPDATE books SET title =?, year=?, author =?, isbn=? WHERE id=?',(title,year,author,isbn,unique_id))
@@ -59,5 +59,31 @@ def drop_table():
     conn.commit()
     conn.close()
 
+def get_row_example(unique_id):
+    conn = sqlite3.connect("bookshop.db")
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM books WHERE id=?',(unique_id,))
+    row = cur.fetchall()
+    conn.commit()
+    conn.close()
+    return row
+
+def update_test():
+    conn = sqlite3.connect("bookshop.db")
+    unique_id = 3
+    title ="Sapient"
+    year = 2000
+    author = "Kim"
+    isbn = 23423423423
+    cur = conn.cursor()
+    cur.execute('UPDATE books SET title =?, year=?, author =?, isbn=? WHERE id=?',(title,year,author,isbn,unique_id))
+    rows = cur.fetchall()
+    conn.commit()
+    conn.close()
+
+    
+
+
 
 #drop_table() 
+#update_test()

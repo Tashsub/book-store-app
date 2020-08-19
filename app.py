@@ -61,16 +61,13 @@ def delete_selected():
 
 def update_selected():
     unique_id =row[0]
-    title= row[1]
-    year = row[2]
-    isbn = int(row[3])
-    author = str(row[4])
-    print("id", type(unique_id))
-    print("Title", type(title))
-    print("year", type(year))
-    print("isbn", type(isbn))
-    print("author", type(author))
-    backend.update_entry(title,year,isbn,author,unique_id)
+    title= title_entry.get()
+    year = year_entry.get()
+    author = author_entry.get()
+    isbn = isbn_entry.get()
+    backend.update_entry(title,year,author,isbn,unique_id)
+    view()
+
     
 
   
