@@ -136,28 +136,28 @@ a11.configure(yscrollcommand=scroll.set)
 scroll.configure(command=a11.yview)
 
 #View all
-viewall=Button(window, text="View All", width = 30, height = 2, command=view)
+viewall=Button(window, text="View All",foreground = "#fbfafb",background="#9bc6ea", width = 30, height = 2,command=view)
 viewall.grid(row=2, column=3, columnspan=10)
 
 
 #Search Entry
-search=Button(window, text="Search Entry", width = 30, height = 2, command=search_q)
+search=Button(window, text="Search Entry", width = 30, height = 2, command=search_q, foreground = "#fbfafb",background="#9bc6ea")
 search.grid(row=3, column=3, columnspan=10) 
 
 #Add entry
-add=Button(window, text="Add Entry", width = 30, height = 2, command=add)
+add=Button(window, text="Add Entry", width = 30, height = 2, command=add, foreground = "#fbfafb",background="#9bc6ea")
 add.grid(row=4, column=3, columnspan=10) 
 
 #update
-update=Button(window, text="Update Selected", width = 30, height = 2, command=update_selected)
+update=Button(window, text="Update Selected", width = 30, height = 2, command=update_selected, foreground = "#fbfafb",background="#9bc6ea")
 update.grid(row=5, column=3, columnspan=10) 
 
 #Delete
-delete=Button(window, text="Delete Selected", width = 30, height = 2, command=delete_selected)
+delete=Button(window, text="Delete Selected", width = 30, height = 2, command=delete_selected, foreground = "#fbfafb",background="#9bc6ea")
 delete.grid(row=6, column=3, columnspan=10) 
 
 #close
-close=Button(window, text="Close", width = 30, height = 2, command=window.destroy)
+close=Button(window, text="Close", width = 30, height = 2, command=window.destroy,foreground = "#fbfafb",background="#9c3835")
 close.grid(row=7, column=3, columnspan=10) 
 
 #image
