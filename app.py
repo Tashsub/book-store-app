@@ -2,16 +2,18 @@
 
 from tkinter import *
 from tkinter import filedialog
-import backend
+from backend import Database
 from PIL import ImageTk, Image
 import os
 from tkinter.filedialog import asksaveasfile 
 import shutil
 
+database=Database("bookshop.db")
+
 #command functions
 def view():
     a11.delete(0,END)
-    for item in backend.view_all():
+    for item in database.view_all():
        a11.insert(END, item) 
 
 def search_q():
@@ -20,7 +22,7 @@ def search_q():
     author= author_entry.get()
     isbn= isbn_entry.get()
     year= year_entry.get()
-    results = backend.search_entry(title, author, isbn, year)
+    results = database.search_entry(title, author, isbn, year)
     for item in results:
         a11.insert(END, item)
 
@@ -30,7 +32,7 @@ def add():
     author= author_entry.get()
     isbn= isbn_entry.get()
     year= year_entry.get()
-    backend.insert_book(title, year, author, isbn)
+    database.insert_book(title, year, author, isbn)
     a11.insert(END,(title, year, author, isbn))
 
 
@@ -61,7 +63,7 @@ def get_seleted_row(event):
 def delete_selected():
     print(row[0])
     unique_id = int(row[0])
-    backend.delete_entry(unique_id)
+    database.delete_entry(unique_id)
     view()
 
 def update_selected():
@@ -70,7 +72,7 @@ def update_selected():
     year = year_entry.get()
     author = author_entry.get()
     isbn = isbn_entry.get()
-    backend.update_entry(title,year,author,isbn,unique_id)
+    database.update_entry(title,year,author,isbn,unique_id)
     view()
 
 def upload_file(event=None):
@@ -84,6 +86,9 @@ def save():
              ('Python Files', '*.py'), 
              ('Text Document', '*.txt')] 
     file = asksaveasfile(filetypes = files, defaultextension = files) 
+
+def close():
+    window.destroy()
   
 
 window=Tk()
@@ -157,7 +162,7 @@ delete=Button(window, text="Delete Selected", width = 30, height = 2, command=de
 delete.grid(row=6, column=3, columnspan=10) 
 
 #close
-close=Button(window, text="Close", width = 30, height = 2, command=window.destroy,foreground = "#fbfafb",background="#9c3835")
+close=Button(window, text="Close", width = 30, height = 2, command=close, foreground = "#fbfafb",background="#9c3835")
 close.grid(row=7, column=3, columnspan=10) 
 
 #image
